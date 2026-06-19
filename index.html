@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>捕鱼达人 · 知识库与简明指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #faf8f5;
+      font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+      color: #2e2b28;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+    }
+    .page-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 40px 40px 28px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+      padding: 2.8rem 2.5rem 3.5rem;
+    }
+
+    /* 标题区 */
+    .guide-header {
+      border-bottom: 2px solid #ede8e0;
+      padding-bottom: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .guide-header h1 {
+      font-size: 2.3rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #3b3530;
+      margin-bottom: 0.4rem;
+    }
+    .guide-header .subhead {
+      font-size: 1rem;
+      color: #7b7168;
+      background: #f5f1ec;
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+    }
+
+    /* 目录感 */
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.8rem 1.2rem;
+      background: #f8f5f0;
+      padding: 1.6rem 1.8rem;
+      border-radius: 24px;
+      margin-bottom: 2.5rem;
+    }
+    .toc-grid a {
+      color: #3d3732;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed #d9d0c5;
+      transition: border-color 0.2s;
+    }
+    .toc-grid a:hover {
+      border-bottom: 1px solid #7f6e5d;
+      color: #5f4d3c;
+    }
+
+    /* 文章段落 */
+    .intro-text {
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+    .intro-text p {
+      margin-bottom: 1rem;
+    }
+
+    /* 引用 / 提示框 */
+    .callout-box {
+      background: #f2eee9;
+      border-left: 5px solid #bfa992;
+      padding: 1.2rem 1.6rem;
+      border-radius: 18px;
+      margin: 1.8rem 0 2.4rem;
+      font-size: 0.98rem;
+    }
+    .callout-box strong {
+      color: #5f4d3c;
+    }
+
+    .info-card {
+      background: #fcfaf8;
+      border: 1px solid #e5ddd4;
+      padding: 1.4rem 1.8rem;
+      border-radius: 28px;
+      margin: 2rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .info-card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #4d3f34;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .info-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .info-card li {
+      padding: 0.3rem 0;
+      position: relative;
+      padding-left: 1.4rem;
+    }
+    .info-card li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #b09780;
+      font-weight: 700;
+    }
+
+    /* 场景与提示混合区 */
+    .scenario-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2rem 0 1.6rem;
+    }
+    .scenario-item {
+      flex: 1 1 200px;
+      background: #faf7f2;
+      border-radius: 24px;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid #eae2d8;
+    }
+    .scenario-item h4 {
+      font-weight: 500;
+      color: #4f4238;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .scenario-item p {
+      font-size: 0.92rem;
+      color: #5b5249;
+    }
+
+    .faq-mini {
+      background: #f4f0ea;
+      padding: 1.2rem 1.8rem;
+      border-radius: 30px;
+      margin-top: 2.2rem;
+    }
+    .faq-mini details {
+      margin: 0.5rem 0;
+    }
+    .faq-mini summary {
+      font-weight: 500;
+      cursor: pointer;
+      color: #3f3730;
+      padding: 0.3rem 0;
+    }
+    .faq-mini summary::-webkit-details-marker {
+      color: #b5a18e;
+    }
+    .faq-mini .answer {
+      padding: 0.2rem 1.2rem 0.4rem;
+      color: #4f473f;
+    }
+
+    /* 底部链接嵌入句 */
+    .link-embed {
+      margin: 2.2rem 0 0.2rem;
+      padding: 1rem 0;
+      border-top: 1px solid #e8e0d6;
+      font-size: 0.98rem;
+      color: #3b3530;
+    }
+    .link-embed a {
+      color: #6b5746;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #cfbfae;
+    }
+    .link-embed a:hover {
+      color: #3d2f23;
+      border-bottom-color: #7f6a56;
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #9b8c7e;
+      text-align: center;
+      border-top: 1px solid #ede6dd;
+      padding-top: 1.6rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+      .page-wrapper {
+        padding: 1.8rem 1.2rem 2.5rem;
+        border-radius: 28px;
+      }
+      .guide-header h1 {
+        font-size: 1.8rem;
+      }
+      .toc-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 1.2rem;
+      }
+      .scenario-grid {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- 标题区 -->
+  <header class="guide-header">
+    <h1>捕鱼达人 · 知识库</h1>
+    <span class="subhead">简明指南 · 访问提醒 · 相关信息</span>
+  </header>
+
+  <!-- 目录式导航感 -->
+  <div class="toc-grid">
+    <a href="#intro">▎游戏概述</a>
+    <a href="#features">▎特点与机制</a>
+    <a href="#scenarios">▎适用场景</a>
+    <a href="#tips">▎提示与注意</a>
+    <a href="#faq">▎常见问题</a>
+    <a href="#relations">▎相关信息</a>
+  </div>
+
+  <!-- 介绍区 -->
+  <section id="intro" class="intro-text">
+    <p><strong>捕鱼达人</strong> 是一款以海洋捕捞为主题、结合策略与反应操作的休闲类游戏。玩家通过瞄准并发射炮弹捕捉不同种类的鱼群，获得相应分数或奖励。整体规则简单，但鱼群移动路径、特殊鱼种及道具系统增加了可玩性。</p>
+    <p>以下内容整理了这款游戏的基本机制、常见场景以及一些实用提醒，帮助新玩家快速了解，也适合老玩家回顾。</p>
+  </section>
+
+  <!-- 引用/提示区 -->
+  <div class="callout-box">
+    <strong>📌 访问提醒：</strong> 若你正在寻找 <a href="https://main-fishingmaster.com" style="color:#5f4d3c; text-decoration:underline; text-underline-offset:3px;">捕鱼达人</a> 的官方网站或最新版本，请注意核对网址。部分第三方平台可能存在仿冒或诱导下载，建议从可靠来源获取。
+  </div>
+
+  <!-- 特点 + 相关信息卡片 -->
+  <section id="features" class="info-card">
+    <h3>🧾 核心特点一览</h3>
+    <ul>
+      <li><strong>鱼种体系：</strong> 不同鱼类对应不同分值，大型鱼或金色鱼往往需要更高命中技巧。</li>
+      <li><strong>武器与道具：</strong> 可切换炮弹等级，部分版本包含冰冻、锁定等辅助功能。</li>
+      <li><strong>局内成长：</strong> 连续命中或捕获特定目标可积累能量，触发额外奖励。</li>
+      <li><strong>场景变化：</strong> 从浅海到深海，背景与鱼群密度会动态调整。</li>
+    </ul>
+  </section>
+
+  <!-- 场景区 -->
+  <section id="scenarios">
+    <h3 style="font-weight:500; font-size:1.15rem; color:#4d3f35; margin-bottom:0.8rem;">🌊 常见使用场景</h3>
+    <div class="scenario-grid">
+      <div class="scenario-item">
+        <h4>碎片时间娱乐</h4>
+        <p>每局耗时较短，适合在通勤、等候时随手玩一局，放松心情。</p>
+      </div>
+      <div class="scenario-item">
+        <h4>策略尝试</h4>
+        <p>通过调整瞄准角度和炮弹频率，摸索不同鱼群的捕获效率。</p>
+      </div>
+      <div class="scenario-item">
+        <h4>朋友间小比试</h4>
+        <p>部分版本支持实时排名或同屏竞技，增加互动乐趣。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 提示区 -->
+  <section id="tips" class="info-card" style="margin-top:0.8rem;">
+    <h3>⚙️ 实用提示</h3>
+    <ul>
+      <li>优先瞄准鱼群密集区域，比追逐单条大鱼更容易积累分数。</li>
+      <li>留意炮弹消耗与收益的比例，避免无节制发射高倍炮弹。</li>
+      <li>特殊鱼种出现时有短暂提示，提前调整准星可以提高命中率。</li>
+      <li>若长时间未捕获，可尝试切换炮弹等级或调整位置。</li>
+    </ul>
+  </section>
+
+  <!-- FAQ摘要区 -->
+  <section id="faq" class="faq-mini">
+    <h3 style="font-weight:500; font-size:1.1rem; color:#3f3730; margin-bottom:0.5rem;">❓ 常见问题摘要</h3>
+    <details>
+      <summary>捕鱼达人是否完全免费？</summary>
+      <div class="answer">大部分基础功能免费，部分道具或皮肤可能需内购，具体以游戏内说明为准。</div>
+    </details>
+    <details>
+      <summary>游戏存档能否跨设备同步？</summary>
+      <div class="answer">取决于版本是否支持账号绑定，建议在设置中查看云存档选项。</div>
+    </details>
+    <details>
+      <summary>联网对战有什么要求？</summary>
+      <div class="answer">通常需要稳定的网络连接，部分模式有最低玩家数量限制。</div>
+    </details>
+  </section>
+
+  <!-- 相关信息区（嵌入主链接的句子） -->
+  <section id="relations" class="link-embed">
+    <p>若想进一步了解游戏更新或社区内容，可以前往 <a href="https://main-fishingmaster.com">捕鱼达人</a> 查阅官方公告与玩家指南。相关信息页面还整理了版本历史、客服通道及常见术语解释。</p>
+  </section>
+
+  <div class="footer-note">
+    本页面为独立整理的知识库入口，内容仅供参考。实际游戏体验以官方版本为准。
+  </div>
+
+</div>
+</body>
+</html>

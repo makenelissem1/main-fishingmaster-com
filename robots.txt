@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://makenelissem1.github.io/main-fishingmaster-com/sitemap.xml
